@@ -46,19 +46,18 @@ public class Shopping {
 		}
 		else if(User.getChoice()==2)
 		{
-			ResultSet rs=st.executeQuery("select Username,item1,item1price,item1quantity,totalprice from itemlist where Username='+user.getUserName()'");
+			String sql="select Username,item1,item1price,item1quantity,totalprice from itemlist where Username= '"+user.getUserName()+"' ";
+			ResultSet rs=st.executeQuery(sql);
+			int totalbill=0;
 			while(rs.next())
 			{
-					System.out.println("Yaahhhhh--------- This is your cart  -------" +rs.getString("Username"));
-					System.out.println("----------Item----------Price----------Quantity----------Total price");
-					System.out.println("----------"+rs.getString("item1")+"----------"+rs.getString("item1price")+"----------"+rs.getString("item1quantity")+"----------"+rs.getString("totalprice"));
-					System.out.println("If you want you want to shop aging- press-9");
-					User.setChoice(sc1.nextInt());
-					if(User.getChoice()==9)
-					{
-					foodstore.foodmaterial();
-					}	
+				System.out.println("ITEM " +rs.getString("item1"));
+				System.out.println("ITEM -PRICE:"+rs.getInt("item1price"));
+				System.out.println("ITEM -QUANTITY:"+rs.getInt("item1quantity"));
+				System.out.println("TOTAL PRICE :" +rs.getInt("totalprice"));
+				totalbill=totalbill+rs.getInt("totalprice");	
 				}
+			System.out.println("TOTAL BILL----------------"+totalbill);
 		}
 		else if(User.getChoice()==9)
 		{
