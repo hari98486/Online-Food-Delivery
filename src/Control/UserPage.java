@@ -9,10 +9,11 @@ import Service.SignUp;
 
 public class UserPage 
 {
-	void user() throws SQLException
+	static void user() throws SQLException
 	{
 		
 		System.out.println("Signup -1"+"\nLogin -2");
+		System.out.println("To GO BACK ------- ------PRESS 9");
 		Scanner sc1=new Scanner(System.in);
 		User user=new User();
 		SignUp signup=new SignUp();
@@ -40,14 +41,29 @@ public class UserPage
 			signup.register();
 			break;
 		case 2:	
-			System.out.println("Now enter your username");
-			 user.setUserName(sc1.next());
-			 System.out.println("Now enter your password");
-			user.setPassword(sc1.next());
-			login.Signin();
+			if(LoginChecking.Checking())
+			{
+				login.Signin();	
+			}
+			else
+			{
+				System.out.println("Invalid username and password"+"\n Please Try it again");
+				System.out.println("To attemp LOGIN Again---Press---9");
+				user.setChoice(sc1.nextInt());
+				if(user.getChoice()==9)
+				{
+					user();
+				}
+				
+			}
+			
 		break;
+		case 9:
+			Main.main(null);
+			break;
 		default:
 			System.out.println("invalid input");
+			user();
 		}
 	}
 }

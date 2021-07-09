@@ -11,14 +11,18 @@ import Utility.ConnectionManager;
 
 public class AdminPage 
 {
-	ConnectionManager cm=new ConnectionManager();
-	Connection con=null;
+	static ConnectionManager cm=new ConnectionManager();
+	static Connection con=null;
 
-	void admin() throws SQLException
+	static void admin() throws SQLException
 	{
 		Scanner sc1=new Scanner(System.in);
-		System.out.println("Wecome to admin page"+"\nPlease Enter login details");
+		System.out.println("Wecome to admin page"+"\nTO go to login page Press--1");
+		System.out.println("To GO BACK ------- ------PRESS 9");
 		User user=new User();
+		user.setChoice(sc1.nextInt());
+		if(user.getChoice()==1)
+		{
 		System.out.println("Enter your username");
 		 user.setUserName(sc1.next());
 		 System.out.println("Now enter your password");
@@ -30,10 +34,25 @@ public class AdminPage
 		{
 			if(rs.getString("username").equals(user.getUserName())?rs.getString("pass").equals(user.getPassword())?true:false:false)
 			{
-			System.out.println("Successfully logged in");
+			AdminOperations.operation();
+			}
+			else
+			{
+				System.out.println("WRONG Username  AND PASSWORD"+"To Login again ----PRESS---9");
+				user.setChoice(sc1.nextInt());
+				if(user.getChoice()==9)
+				{
+					admin();
+				}
+				
 			}
 		}
-		System.out.println("------------------HELLO! ADMIN------YOU CAN DO ANYTHING  WITH USERDATABSE----------------------------");
-		System.out.println("1.TO delete the database of user"+"\n2.TO see full info about user"+"\n3.To know the count of customers using this online food protal");
+		}
+		else if(user.getChoice()==9)
+		{
+			Main.main(null);
+		}
+		
+		}
+		
 	}
-}

@@ -71,7 +71,7 @@ public class User {
 		return Choice;
 	}
 
-	public void setChoice(int choice) {
+	public static void setChoice(int choice) {
 		Choice = choice;
 	}
 		

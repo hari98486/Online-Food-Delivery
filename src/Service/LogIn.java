@@ -12,23 +12,10 @@ import Utility.ConnectionManager;
 
 public class LogIn 
 {
-	ConnectionManager cm=new ConnectionManager();
-	Connection con=null;
-	public void Signin() throws SQLException
+	public static void Signin() throws SQLException
 	{
-		Scanner sc1=new Scanner(System.in);
-		User user=new User();
-		con =cm.getConnection();
-		Statement st=con.createStatement();
-		ResultSet rs=st.executeQuery("Select name,Username, Password from userdata");
-		while(rs.next())
-		{
-			if(rs.getString("Username").equals(user.getUserName())?rs.getString("Password").equals(user.getPassword())?true:false:false)
-			{
-			System.out.println("Successfully logged in" +rs.getString("name"));
+			System.out.println("---------------Successfully logged in-----------");
 			foodstore store=new foodstore();
 			store.foodmaterial();
-			}
-		}
 	}
 }
