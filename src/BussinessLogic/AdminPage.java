@@ -1,4 +1,4 @@
-package Control;
+package BussinessLogic;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Scanner;
 
+import Control.Main;
 import Model.User;
 import Utility.ConnectionManager;
 
@@ -14,7 +15,7 @@ public class AdminPage
 	static ConnectionManager cm=new ConnectionManager();
 	static Connection con=null;
 
-	static void admin() throws SQLException
+	public static void admin() throws SQLException
 	{
 		Scanner sc1=new Scanner(System.in);
 		System.out.println("Wecome to admin page"+"\nTO go to login page Press--1");

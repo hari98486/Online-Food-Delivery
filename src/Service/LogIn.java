@@ -6,7 +6,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Scanner;
 
-import Control.foodstore;
+import BussinessLogic.foodstore;
 import Model.User;
 import Utility.ConnectionManager;
 

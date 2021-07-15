@@ -1,13 +1,13 @@
-package Control;
+package BussinessLogic;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-
 
 import Model.User;
 import Utility.ConnectionManager;
@@ -57,9 +57,12 @@ public class foodstore
 			case 2:	
 			LoginChecking.Checking();
 			System.out.println("-----Enter Your New Password--------");
-			user.setPassword(sc1.next());
-			String updatepassword="update userdata Set Password ='" +user.getPassword()+"' where Username='+user.getUserName()'";
-			st.executeUpdate(updatepassword);
+			String str=sc1.next();
+			String updatepassword="update userdata Set Password =? where Username=?";
+			PreparedStatement statement = con.prepareStatement(updatepassword);
+			statement.setString(1,str);
+			statement.setString(2,user.getUserName());
+			statement.executeUpdate();
 			System.out.println("Your password had been updated successfully");
 			break;
 			case 9:

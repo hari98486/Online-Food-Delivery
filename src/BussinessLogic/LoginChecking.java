@@ -1,4 +1,4 @@
-package Control;
+package BussinessLogic;
 
 import java.sql.Connection;
 import java.sql.ResultSet;

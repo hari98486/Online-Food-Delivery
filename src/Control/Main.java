@@ -3,6 +3,8 @@ package Control;
 import java.sql.SQLException;
 import java.util.Scanner;
 
+import BussinessLogic.AdminPage;
+import BussinessLogic.UserPage;
 import Model.User;
 
 public class Main {

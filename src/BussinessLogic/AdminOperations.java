@@ -1,6 +1,7 @@
-package Control;
+package BussinessLogic;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -12,10 +13,12 @@ import Utility.ConnectionManager;
 public class AdminOperations {
 	static ConnectionManager cm=new ConnectionManager();
 	static Connection con=null;
+	static String sql;
 	static Scanner sc1=new Scanner(System.in);
 	public static void operation() throws SQLException {
 		con =cm.getConnection();
 		String delete,userdelete,userdetails;
+		User user =new User();
 		Statement st=con.createStatement();
 		System.out.println("Successfully logged in");
 		System.out.println("------------------HELLO! ADMIN------YOU CAN DO ANYTHING  WITH USERDATABSE----------------------------");
@@ -24,15 +27,30 @@ public class AdminOperations {
 		switch(User.getChoice())
 		{
 		case 1:
-			System.out.println("Enter username you want to delete the database of that user");
+			System.out.println("Enter username you want to delete WHOSE WHO DONT HAVE ORDERS");
 			userdelete=sc1.next();
-			                                       delete="Delete from userdata where Username='+user.getUserName()'";
-			st.executeUpdate(delete);
-			System.out.println("Deleted data from user table");
-			                                         delete="Delete from itemlist where Username='+itemlist'";
-			st.executeUpdate(delete);
-			System.out.println("Deleted data from Itemlist table");
-			adminbackoperation();
+//			ResultSet result = st.executeQuery("SELECT Username FROM itemlist");
+//			while (result.next())
+//			{
+//			    if(userdelete.equals(result.getString("Username")))
+//			    {
+//			    	System.out.println("User had products in his cart i.e user avilable in itemlist table ");
+//			    }
+//			String check1 = "SELECT Username FROM userdata";
+//			ResultSet result1 = st.executeQuery(check1);
+//			    while (result1.next())
+//			    {
+//			    	String username1 = result.getString("Username");
+//			    if(userdelete.equals(username1))
+//			    {
+//			    	System.out.println("User dont hae products in cart , SO DELETING THE USER ");
+					sql = "Delete from userdata where  Username=?";
+					PreparedStatement statement = con.prepareStatement(sql);
+					statement.setString(1, userdelete);
+					statement.executeUpdate();
+					System.out.println("Deleted data from user table");
+					adminbackoperation();
+//			    }
 			break;
 		case 2:
 			System.out.println("----here is the full table info--------");

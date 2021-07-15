@@ -1,21 +1,23 @@
-package Control;
+package BussinessLogic;
 
 import java.sql.SQLException;
 import java.util.Scanner;
 
+import Control.Main;
 import Model.User;
 import Service.LogIn;
 import Service.SignUp;
 
 public class UserPage 
 {
-	static void user() throws SQLException
+	public static void user() throws SQLException
 	{
 		
 		System.out.println("Signup -1"+"\nLogin -2");
 		System.out.println("To GO BACK ------- ------PRESS 9");
 		Scanner sc1=new Scanner(System.in);
 		User user=new User();
+		Errorpage error1 =new Errorpage();
 		SignUp signup=new SignUp();
 		user.setChoice(sc1.nextInt());
 		LogIn login=new LogIn();
@@ -25,6 +27,9 @@ public class UserPage
 			System.out.println("-------------------New User--------------------------");
 			System.out.println("Kindly Enter your name");
 			 user.setName(sc1.next());
+			 int length=user.getName().length();
+			 if(length>1)
+			 {
 			 System.out.println("Enter your Mobile number");
 			 user.setPhoneNumber(sc1.next());
 			 System.out.println("Enter yoyr city name");
@@ -35,10 +40,23 @@ public class UserPage
 			 user.setDoorNo(sc1.next());
 			 System.out.println("Now enter your username");
 			 user.setUserName(sc1.next());
+			 int length1=user.getUserName().length();
+			 if(length1>1)
+			 {
 			 System.out.println("Now enter your password");
 			user.setPassword(sc1.next());
 			System.out.println("Hi "+user.getName()+ " welocome to our page");
 			signup.register();
+			 }
+			 else
+			 {
+			    error1.error();  
+			 }
+			 }
+			 else
+			 {
+				error1.error(); 
+			 }
 			break;
 		case 2:	
 			if(LoginChecking.Checking())
