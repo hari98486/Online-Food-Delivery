@@ -29,28 +29,29 @@ public class AdminOperations {
 		case 1:
 			System.out.println("Enter username you want to delete WHOSE WHO DONT HAVE ORDERS");
 			userdelete=sc1.next();
-//			ResultSet result = st.executeQuery("SELECT Username FROM itemlist");
-//			while (result.next())
-//			{
-//			    if(userdelete.equals(result.getString("Username")))
-//			    {
-//			    	System.out.println("User had products in his cart i.e user avilable in itemlist table ");
-//			    }
-//			String check1 = "SELECT Username FROM userdata";
-//			ResultSet result1 = st.executeQuery(check1);
-//			    while (result1.next())
-//			    {
-//			    	String username1 = result.getString("Username");
-//			    if(userdelete.equals(username1))
-//			    {
-//			    	System.out.println("User dont hae products in cart , SO DELETING THE USER ");
+			ResultSet result = st.executeQuery("SELECT Username FROM itemlist");
+			while (result.next())
+			{
+				if(userdelete.equals(result.getString("Username")))
+				{
+			System.out.println("YOU CANNOT DELETE THE USERNAME ----USER HAS PRODUCTS IN CART");
+			System.exit(0);
+				}
+			}
+			ResultSet result1 = st.executeQuery("SELECT Username FROM userdata");
+			while (result1.next())
+			{
+				if(userdelete.equals(result1.getString("Username")))
+				{
+					System.out.println("User has no products in cart and found in userdata ");
 					sql = "Delete from userdata where  Username=?";
 					PreparedStatement statement = con.prepareStatement(sql);
 					statement.setString(1, userdelete);
 					statement.executeUpdate();
 					System.out.println("Deleted data from user table");
 					adminbackoperation();
-//			    }
+				}
+			}
 			break;
 		case 2:
 			System.out.println("----here is the full table info--------");
@@ -61,6 +62,7 @@ public class AdminOperations {
 				System.out.println("USERNAME :" +rs.getString("Username"));
 				System.out.println("PASSWORD :" +rs.getString("Password"));
 				System.out.println("CITY NAME :" +rs.getString("CityName"));
+				System.out.println("-----------------------------------");
 			}
 			adminbackoperation();
 			break;
